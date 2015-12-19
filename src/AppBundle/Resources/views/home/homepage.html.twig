@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
+</head>
+
+<body>
+    <ul>
+        {% for image in banner %}
+            {% if image.isActive == 1 %}
+                <li>
+                    <a href="http://{{ image.link }}">
+                        <img src="{{ asset('bundles/app/images/banner/1.png') }}" />
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
