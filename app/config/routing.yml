@@ -1,3 +1,12 @@
-homepage:
+index:
     path:      /
     defaults:  { _controller: AppBundle:Home:index }
+products:
+    path:      /producten
+    defaults:  { _controller: AppBundle:Product:index }
+category:
+    path:      /producten/{category}
+    defaults:  { _controller: AppBundle:Product:category }
+product:
+    path:      /producten/{category}/{product}
+    defaults:  { _controller: AppBundle:Product:product }

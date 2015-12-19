@@ -12,13 +12,14 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        // replace this example code with whatever you need
         return $this->render('AppBundle:home:homepage.html.twig', ['banner' => $this->getBanner()]);
     }
 
-
-    public function getBanner()
+    /**
+     * @return \AppBundle\Entity\Banner[]|array
+     */
+    private function getBanner()
     {
-        return $this->getDoctrine()->getRepository('AppBundle:Banner')->findAll();
+        return $this->getDoctrine()->getRepository('AppBundle:Banner')->findBy(['isActive' => true]);
     }
 }
