@@ -1,0 +1,11 @@
+body {
+    background: #ccc;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ul li img {
+    width: 100%;
+}

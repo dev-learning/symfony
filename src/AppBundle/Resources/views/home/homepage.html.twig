@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title of the document</title>
+    <link href="{{ asset('bundles/app/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/app/css/default.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <ul>
-        {% for image in banner %}
-            {% if image.isActive == 1 %}
-                <li>
-                    <a href="http://{{ image.link }}">
-                        <img src="{{ asset('bundles/app/images/banner/2.png') }}" />
-                    </a>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    {% for image in banner %}
+                        {% if image.isActive == 1 %}
+                            <li>
+                                <a href="http://{{ image.link }}">
+                                    <img src="{{ asset('bundles/app/images/banner/' ~ image.name ~ '.png') }}" />
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
