@@ -19,6 +19,11 @@ class Product
     protected $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    protected $categoryId;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     protected $name;

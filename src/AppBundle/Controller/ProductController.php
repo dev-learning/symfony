@@ -12,7 +12,8 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:products:products.html.twig', ['products', $this->getAllProducts()]);
+        $this->createFakeProduct();
+        return $this->render('AppBundle:product:products.html.twig', ['products' => $this->getAllProducts()]);
     }
 
     /**
@@ -31,11 +32,12 @@ class ProductController extends Controller
     {
         $product = new Product();
         $product->setName('Jack & Jones broek');
-        $product->setLink('jack-&-jones-broek');
+        $product->setLink($this->generateUrl('product', ['category' => 'schoen', 'product' => $product->getName()]));
         $product->setDescription('Mooi broek');
         $product->setPrice(10.95);
         $product->setSalePrice(9.95);
         $product->setIsActive(true);
+        print_r($product);exit;
         $this->getDoctrine()->getManager()->persist($product);
         $this->getDoctrine()->getManager()->flush();
         return true;
