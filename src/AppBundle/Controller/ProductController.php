@@ -12,7 +12,6 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
-        $this->createFakeProduct();
         return $this->render('AppBundle:product:products.html.twig', ['products' => $this->getAllProducts()]);
     }
 
@@ -22,6 +21,17 @@ class ProductController extends Controller
     private function getAllProducts()
     {
         return $this->getDoctrine()->getRepository('AppBundle:Product')->findBy(['isActive' => true]);
+    }
+
+
+    public function categoryAction($category)
+    {
+        $categoryConditions = ['link' => $category, 'isActive' => true];
+        $category = $this->getDoctrine()->getRepository('AppBundle:Category')->findOneBy($categoryConditions);
+
+        // get all products by category id
+        print_r($category);exit;
+        return ;
     }
 
     /**

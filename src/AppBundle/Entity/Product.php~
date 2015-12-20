@@ -280,28 +280,4 @@ class Product
     {
         return $this->category;
     }
-
-    /**
-     * Add category
-     *
-     * @param \AppBundle\Entity\category $category
-     *
-     * @return Product
-     */
-    public function addCategory(\AppBundle\Entity\category $category)
-    {
-        $this->category[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \AppBundle\Entity\category $category
-     */
-    public function removeCategory(\AppBundle\Entity\category $category)
-    {
-        $this->category->removeElement($category);
-    }
 }

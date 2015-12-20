@@ -27,7 +27,6 @@ class Banner
      */
     protected $link;
 
-
     /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
