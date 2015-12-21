@@ -28,4 +28,13 @@ class ProductService
     {
         return $this->repository->findOneBy(['path' => $path]);
     }
+
+    /**
+     * @param $productId
+     * @return object
+     */
+    public function getProductById($productId)
+    {
+        return $this->repository->findOneBy(['id' => $productId]);
+    }
 }

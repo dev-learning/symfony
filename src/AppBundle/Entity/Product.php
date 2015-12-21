@@ -54,12 +54,6 @@ class Product
      */
     protected $category;
 
-
-    public function __construct($path)
-    {
-        $this->setPath($path);
-    }
-
     /**
      * @return mixed
      */
