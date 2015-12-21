@@ -33,6 +33,15 @@ class Category
     protected $isActive;
 
     /**
+     * Category constructor.
+     * @param $name
+     */
+    public function __construct($name)
+    {
+        $this->setName($name);
+    }
+
+    /**
      * Get id
      *
      * @return integer

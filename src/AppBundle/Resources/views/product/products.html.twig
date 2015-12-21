@@ -29,7 +29,7 @@
             <div class="col-sm-12">
                 {% for product in products %}
                     <div class="col-sm-3">
-                        <a href="/producten/category/{{ product.link }}">
+                        <a href="{{ product.link }}">
                             <div class="productCol">
                                 {{ product.name }}
                             </div>

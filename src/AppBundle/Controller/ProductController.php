@@ -26,9 +26,14 @@ class ProductController extends Controller
 
     public function categoryAction($category)
     {
-        $categoryConditions = ['link' => $category, 'isActive' => true];
-        $category = $this->getDoctrine()->getRepository('AppBundle:Category')->findOneBy($categoryConditions);
+        $categories = explode('+', $category);
+        $categoryConditions = ['link' => $categories, 'isActive' => true];
+        $foundedCategories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy($categoryConditions);
 
+
+        $productConditions = ['isActive' => true, 'categories' => $foundedCategories];
+
+        $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findBy($productConditions);
         // get all products by category id
         print_r($category);exit;
         return ;
@@ -47,7 +52,6 @@ class ProductController extends Controller
         $product->setPrice(10.95);
         $product->setSalePrice(9.95);
         $product->setIsActive(true);
-        print_r($product);exit;
         $this->getDoctrine()->getManager()->persist($product);
         $this->getDoctrine()->getManager()->flush();
         return true;

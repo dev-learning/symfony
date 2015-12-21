@@ -54,18 +54,25 @@ class Product
     protected $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="category")
+     * @ORM\ManyToMany(targetEntity="Category")
      * @ORM\JoinTable(name="products_categories",
      *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
      *      )
      */
-    protected $category;
+    protected $categories;
+
+
+    public function __construct($name, $link, $price, $categories)
+    {
+        $this->setName($name)
+            ->setLink($link)
+            ->setPrice($price)
+            ->setCategories($categories);
+    }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @return mixed
      */
     public function getId()
     {
@@ -73,184 +80,16 @@ class Product
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Products
+     * @param mixed $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
-
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set link
-     *
-     * @param string $link
-     *
-     * @return Products
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * Get link
-     *
-     * @return string
-     */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Products
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Set salePrice
-     *
-     * @param string $salePrice
-     *
-     * @return Products
-     */
-    public function setSalePrice($salePrice)
-    {
-        $this->salePrice = $salePrice;
-
-        return $this;
-    }
-
-    /**
-     * Get salePrice
-     *
-     * @return string
-     */
-    public function getSalePrice()
-    {
-        return $this->salePrice;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return Products
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Products
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->categoryId = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add categoryId
-     *
-     * @param \AppBundle\Entity\Product $categoryId
-     *
-     * @return Product
-     */
-    public function addCategoryId(\AppBundle\Entity\Product $categoryId)
-    {
-        $this->categoryId[] = $categoryId;
-
-        return $this;
-    }
-
-    /**
-     * Remove categoryId
-     *
-     * @param \AppBundle\Entity\Product $categoryId
-     */
-    public function removeCategoryId(\AppBundle\Entity\Product $categoryId)
-    {
-        $this->categoryId->removeElement($categoryId);
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return mixed
      */
     public function getCategoryId()
     {
@@ -258,50 +97,133 @@ class Product
     }
 
     /**
-     * Set category
-     *
-     * @param \AppBundle\Entity\category $category
-     *
-     * @return Product
+     * @param mixed $categoryId
      */
-    public function setCategory(\AppBundle\Entity\category $category = null)
+    public function setCategoryId($categoryId)
     {
-        $this->category = $category;
-
+        $this->categoryId = $categoryId;
         return $this;
     }
 
     /**
-     * Get category
-     *
-     * @return \AppBundle\Entity\category
+     * @return mixed
      */
-    public function getCategory()
+    public function getName()
     {
-        return $this->category;
+        return $this->name;
     }
 
     /**
-     * Add category
-     *
-     * @param \AppBundle\Entity\category $category
-     *
-     * @return Product
+     * @param mixed $name
      */
-    public function addCategory(\AppBundle\Entity\category $category)
+    public function setName($name)
     {
-        $this->category[] = $category;
-
+        $this->name = $name;
         return $this;
     }
 
     /**
-     * Remove category
-     *
-     * @param \AppBundle\Entity\category $category
+     * @return mixed
      */
-    public function removeCategory(\AppBundle\Entity\category $category)
+    public function getLink()
     {
-        $this->category->removeElement($category);
+        return $this->link;
     }
+
+    /**
+     * @param mixed $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalePrice()
+    {
+        return $this->salePrice;
+    }
+
+    /**
+     * @param mixed $salePrice
+     */
+    public function setSalePrice($salePrice)
+    {
+        $this->salePrice = $salePrice;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param mixed $categories
+     * @return $this
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+        return $this;
+    }
+
+
 }
