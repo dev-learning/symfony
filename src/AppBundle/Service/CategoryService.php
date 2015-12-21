@@ -13,7 +13,7 @@ class CategoryService
     private $repository;
 
     /**
-     * ProductService constructor.
+     * @param ObjectRepository $repository
      */
     public function __construct(ObjectRepository $repository)
     {
@@ -27,5 +27,15 @@ class CategoryService
     public function getCategoryByName($categoryName)
     {
         return $this->repository->findOneBy(['name' => $categoryName]);
+    }
+
+
+    /**
+     * @param $categoryName
+     * @return Category
+     */
+    public function getProductsByCategoryName($categoryName)
+    {
+        return $this->repository->findBy(['name' => $categoryName]);
     }
 }

@@ -19,11 +19,6 @@ class Product
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
-     */
-    protected $categoryId;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
@@ -54,21 +49,17 @@ class Product
     protected $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Category")
-     * @ORM\JoinTable(name="products_categories",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
-     *      )
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="product")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    protected $categories;
+    protected $category;
 
 
-    public function __construct($name, $link, $price, $categories)
+    public function __construct($name, $link, $price)
     {
         $this->setName($name)
             ->setLink($link)
-            ->setPrice($price)
-            ->setCategories($categories);
+            ->setPrice($price);
     }
 
     /**
@@ -80,28 +71,12 @@ class Product
     }
 
     /**
-     * @param mixed $id
+     * @param $id
+     * @return $this
      */
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
-
-    /**
-     * @param mixed $categoryId
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
         return $this;
     }
 
@@ -114,7 +89,8 @@ class Product
     }
 
     /**
-     * @param mixed $name
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -131,7 +107,8 @@ class Product
     }
 
     /**
-     * @param mixed $link
+     * @param $link
+     * @return $this
      */
     public function setLink($link)
     {
@@ -148,7 +125,8 @@ class Product
     }
 
     /**
-     * @param mixed $price
+     * @param $price
+     * @return $this
      */
     public function setPrice($price)
     {
@@ -165,7 +143,8 @@ class Product
     }
 
     /**
-     * @param mixed $salePrice
+     * @param $salePrice
+     * @return $this
      */
     public function setSalePrice($salePrice)
     {
@@ -182,7 +161,8 @@ class Product
     }
 
     /**
-     * @param mixed $isActive
+     * @param $isActive
+     * @return $this
      */
     public function setIsActive($isActive)
     {
@@ -199,7 +179,8 @@ class Product
     }
 
     /**
-     * @param mixed $description
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -210,18 +191,18 @@ class Product
     /**
      * @return mixed
      */
-    public function getCategories()
+    public function getCategory()
     {
-        return $this->categories;
+        return $this->category;
     }
 
     /**
-     * @param mixed $categories
+     * @param $category
      * @return $this
      */
-    public function setCategories($categories)
+    public function setCategory($category)
     {
-        $this->categories = $categories;
+        $this->category = $category;
         return $this;
     }
 

@@ -42,6 +42,11 @@ class Category
     }
 
     /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    protected $products;
+
+    /**
      * Get id
      *
      * @return integer
@@ -121,5 +126,21 @@ class Category
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
     }
 }
