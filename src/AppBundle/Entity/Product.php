@@ -55,11 +55,9 @@ class Product
     protected $category;
 
 
-    public function __construct($name, $path, $price)
+    public function __construct($path)
     {
-        $this->setName($name)
-            ->setPath($path)
-            ->setPrice($price);
+        $this->setPath($path);
     }
 
     /**
