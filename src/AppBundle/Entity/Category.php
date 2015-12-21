@@ -25,7 +25,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $link;
+    protected $path;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
@@ -81,27 +81,27 @@ class Category
     }
 
     /**
-     * Set link
+     * Set path
      *
-     * @param string $link
+     * @param string $path
      *
      * @return Category
      */
-    public function setLink($link)
+    public function setPath($path)
     {
-        $this->link = $link;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Get link
+     * Get path
      *
      * @return string
      */
-    public function getLink()
+    public function getPath()
     {
-        return $this->link;
+        return $this->path;
     }
 
     /**

@@ -67,7 +67,7 @@ class Banner
     }
 
     /**
-     * Set link
+     * Set path
      *
      * @param string $link
      *
@@ -81,7 +81,7 @@ class Banner
     }
 
     /**
-     * Get link
+     * Get path
      *
      * @return string
      */

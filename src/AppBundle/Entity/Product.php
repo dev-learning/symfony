@@ -26,7 +26,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $link;
+    protected $path;
 
     /**
      * @ORM\Column(type="decimal", scale=2)
@@ -55,10 +55,10 @@ class Product
     protected $category;
 
 
-    public function __construct($name, $link, $price)
+    public function __construct($name, $path, $price)
     {
         $this->setName($name)
-            ->setLink($link)
+            ->setPath($path)
             ->setPrice($price);
     }
 
@@ -101,18 +101,18 @@ class Product
     /**
      * @return mixed
      */
-    public function getLink()
+    public function getPath()
     {
-        return $this->link;
+        return $this->path;
     }
 
     /**
-     * @param $link
+     * @param $path
      * @return $this
      */
-    public function setLink($link)
+    public function setPath($path)
     {
-        $this->link = $link;
+        $this->path = $path;
         return $this;
     }
 
