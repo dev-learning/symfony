@@ -17,32 +17,22 @@ class CategoryServiceTest extends \PHPUnit_Framework_TestCase
 
         $repository->expects(self::once())
             ->method('findOneBy')
-            ->with(['name' => $categoryName]) // actual test
-            ->will(self::returnValue(new Category($categoryName)));
-
+            ->with(['name' => $categoryName]); // actual test
         $service = new CategoryService($repository);
-        self::assertEquals(new Category($categoryName), $service->getCategoryByName($categoryName));
+        $service->getCategoryByName($categoryName);
     }
 
-    public function testCategoryServiceFindProductsByCategoryName()
+    public function testCategoryServiceReturnsNotFoundCategoryWhenCategoryNameIsNotFound()
     {
-        $categoryName = 'foo';
-
-        $category = new Category($categoryName);
-        $category->setProducts([new Product('foo', 'foo', 1.95), new Product('bar', 'bar', 1.95)]);
-
-        $categoryForService = new Category($categoryName);
-        $products = [new Product('foo', 'foo', 1.95), new Product('bar', 'bar', 1.95)];
-        $categoryForService->setProducts($products);
-
         $repository = $this->getMockBuilder(ObjectRepository::class)
             ->getMock();
-        $repository
-            ->method('findBy')
-            ->with(['name' => $categoryName])
-            ->will(self::returnValue($categoryForService));
+
+        $repository->expects(self::once())
+            ->method('findOneBy')
+            ->willThrowException(new \Exception());
 
         $service = new CategoryService($repository);
-        self::assertEquals($category, $service->getProductsByCategoryName($categoryName));
+        $category = $service->getCategoryByName('unknown category');
+        self::assertEquals(CategoryService::CATEGORY_NOT_FOUND, $category->getName());
     }
 }

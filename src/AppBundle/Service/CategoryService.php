@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectRepository;
 
 class CategoryService
 {
+    const CATEGORY_NOT_FOUND = 'Category not found';
+
     /**
      * @var ObjectRepository
      */
@@ -26,7 +28,12 @@ class CategoryService
      */
     public function getCategoryByName($categoryName)
     {
-        return $this->repository->findOneBy(['name' => $categoryName]);
+        try {
+            $category = $this->repository->findOneBy(['name' => $categoryName]);
+        } catch (\Exception $e) {
+            $category = new Category(self::CATEGORY_NOT_FOUND);
+        }
+        return $category;
     }
 
 

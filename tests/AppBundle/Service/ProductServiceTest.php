@@ -8,6 +8,28 @@ use Doctrine\Common\Persistence\ObjectRepository;
 
 class ProductServiceTest extends \PHPUnit_Framework_TestCase
 {
+    public function testProductServiceGetAllActiveProducts()
+    {
+        $products = [];
+        $products[0] = new Product();
+        $products[0]->setIsActive(true);
+
+        $products[1] = new Product();
+
+        $repository = $this->getMockBuilder(ObjectRepository::class)
+            ->getMock();
+
+        $repository->expects(self::any())
+            ->method('findBy')
+            ->with(['isActive' => true])
+            ->will(self::returnValue($products));
+
+        $service = new ProductService($repository);
+        var_dump($service->getAllActiveProducts());exit;
+        self::assertEquals($products, $service->getAllActiveProducts());
+    }
+
+
     public function testProductServiceGetProductByPath()
     {
         $productPath = 'foo';

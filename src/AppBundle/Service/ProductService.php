@@ -13,11 +13,37 @@ class ProductService
     private $repository;
 
     /**
+     * @var CategoryService
+     */
+    private $categoryService;
+
+    /**
      * @param ObjectRepository $repository
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(ObjectRepository $repository, CategoryService $categoryService)
     {
         $this->repository = $repository;
+
+        $this->categoryService = $categoryService;
+    }
+
+    /**
+     * get all active products
+     */
+    public function getAllActiveProducts()
+    {
+        $this->repository->findBy(['isActive' => true]);
+    }
+
+    /**
+     * @return Product[]
+     */
+    public function getProductsByCategoryName($categoryName)
+    {
+//        $category = $this->categoryService->getCategoryByName($categoryName);
+//        return $category->getProducts();
+        $products = $this->repository->findBy(['category' => $categoryName]);
+        return $products;
     }
 
     /**
