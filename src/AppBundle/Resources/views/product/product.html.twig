@@ -27,15 +27,20 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="col-sm-3">
-                    {% for product in products %}
-                        <a href="/producten/{{ product.category.name }}/{{ product.path }}">
-                            <div class="productCol">
-                                {{ product.name }}
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
+                <table class="table">
+                    <tr>
+                        <td>Naam:</td><td>{{ product.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Beschrijving:</td><td>{{ product.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Prijs:</td><td>{{ product.price }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sale prijs:</td><td>{{ product.salePrice }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

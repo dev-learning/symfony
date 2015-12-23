@@ -2,8 +2,6 @@
 
 namespace Tests\AppBundle\Service;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
 use AppBundle\Service\CategoryService;
 use Doctrine\Common\Persistence\ObjectRepository;
 
@@ -17,7 +15,7 @@ class CategoryServiceTest extends \PHPUnit_Framework_TestCase
 
         $repository->expects(self::once())
             ->method('findOneBy')
-            ->with(['name' => $categoryName]); // actual test
+            ->with(['name' => $categoryName]);
         $service = new CategoryService($repository);
         $service->getCategoryByName($categoryName);
     }

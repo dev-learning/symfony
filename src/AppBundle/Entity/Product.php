@@ -49,7 +49,8 @@ class Product
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="product")
+     * (S) of products needs for mapping (ManyToOne)
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;

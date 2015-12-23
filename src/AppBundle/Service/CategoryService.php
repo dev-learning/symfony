@@ -22,6 +22,15 @@ class CategoryService
         $this->repository = $repository;
     }
 
+
+    /**
+     * @return Categories
+     */
+    public function getAllActiveCategories()
+    {
+        return $this->repository->findBy(['isActive' => 1]);
+    }
+
     /**
      * @param $categoryName
      * @return Category
@@ -29,13 +38,12 @@ class CategoryService
     public function getCategoryByName($categoryName)
     {
         try {
-            $category = $this->repository->findOneBy(['name' => $categoryName]);
+            $category = $this->repository->findOneBy(['name' => $categoryName, 'isActive' => 1]);
         } catch (\Exception $e) {
             $category = new Category(self::CATEGORY_NOT_FOUND);
         }
         return $category;
     }
-
 
     /**
      * @param $categoryName
@@ -43,6 +51,11 @@ class CategoryService
      */
     public function getProductsByCategoryName($categoryName)
     {
-        return $this->repository->findBy(['name' => $categoryName]);
+        try {
+            $category = $this->repository->findOneBy(['name' => $categoryName, 'isActive' => 1]);
+        } catch (\Exception $e) {
+            $category = new Category(self::CATEGORY_NOT_FOUND);
+        }
+        return $category;
     }
 }

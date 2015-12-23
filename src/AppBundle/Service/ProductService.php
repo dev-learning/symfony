@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectRepository;
 
 class ProductService
 {
+    CONST CATEGORY_SERVICE_IS_NOT_AVAILABLE = 'Category service is not available';
+
     /**
      * @var ObjectRepository
      */
@@ -19,12 +21,16 @@ class ProductService
 
     /**
      * @param ObjectRepository $repository
+     * @param CategoryService $categoryService
      */
-    public function __construct(ObjectRepository $repository, CategoryService $categoryService)
+    public function __construct(ObjectRepository $repository, CategoryService $categoryService = null)
     {
         $this->repository = $repository;
 
-        $this->categoryService = $categoryService;
+        if ($categoryService)
+        {
+            $this->categoryService = $categoryService;
+        }
     }
 
     /**
@@ -32,18 +38,20 @@ class ProductService
      */
     public function getAllActiveProducts()
     {
-        $this->repository->findBy(['isActive' => true]);
+        return $this->repository->findBy(['isActive' => 1]);
     }
 
     /**
-     * @return Product[]
+     * @return Products[]
+     * @param string $categoryName
      */
     public function getProductsByCategoryName($categoryName)
     {
-//        $category = $this->categoryService->getCategoryByName($categoryName);
-//        return $category->getProducts();
-        $products = $this->repository->findBy(['category' => $categoryName]);
-        return $products;
+        if (!isset($this->categoryService) || empty($this->categoryService))
+        {
+            return self::CATEGORY_SERVICE_IS_NOT_AVAILABLE;
+        }
+        return $this->categoryService->getProductsByCategoryName($categoryName);
     }
 
     /**
@@ -52,7 +60,7 @@ class ProductService
      */
     public function getProductByPath($path)
     {
-        return $this->repository->findOneBy(['path' => $path]);
+        return $this->repository->findOneBy(['path' => $path, 'isActive' => 1]);
     }
 
     /**
@@ -61,6 +69,6 @@ class ProductService
      */
     public function getProductById($productId)
     {
-        return $this->repository->findOneBy(['id' => $productId]);
+        return $this->repository->findOneBy(['id' => $productId, 'isActive' => 1]);
     }
 }
