@@ -56,6 +56,7 @@ class CategoryService
         } catch (\Exception $e) {
             $category = new Category(self::CATEGORY_NOT_FOUND);
         }
+
         return $category;
     }
 }
