@@ -1,4 +1,0 @@
-services:
-    banner:
-        class: AppBundle\Controller\BannerController
-        arguments: [ "@doctrine.orm.entity_manager" ]

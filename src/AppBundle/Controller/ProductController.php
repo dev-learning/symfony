@@ -6,20 +6,31 @@ use AppBundle\Service\CategoryService;
 use AppBundle\Service\ProductService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
+
 class ProductController extends Controller
 {
+    /**
+     * @var ProductService
+     */
+    private $productService;
+
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        $productService = new ProductService($this->getDoctrine()->getRepository('AppBundle:Product'));
         return $this->render('AppBundle:product:products.html.twig',
-            ['products' => $productService->getAllActiveProducts()]
+            ['products' => $this->productService->getAllActiveProducts()]
         );
     }
 
 
+    /**
+     ** @param $category
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function categoryAction($category)
     {
         $productService = new ProductService(
